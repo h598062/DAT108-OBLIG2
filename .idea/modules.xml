@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DAT108-OBLIG2.iml" filepath="$PROJECT_DIR$/DAT108-OBLIG2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Oppg1/Oppg1.iml" filepath="$PROJECT_DIR$/Oppg1/Oppg1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Oppg2/Oppg2.iml" filepath="$PROJECT_DIR$/Oppg2/Oppg2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Oppg3/Oppg3.iml" filepath="$PROJECT_DIR$/Oppg3/Oppg3.iml" />
     </modules>
   </component>
 </project>

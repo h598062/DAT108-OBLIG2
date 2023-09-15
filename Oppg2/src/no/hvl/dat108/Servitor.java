@@ -1,7 +1,10 @@
 package no.hvl.dat108;
 
+import java.util.Random;
+
 public class Servitor extends Thread {
-	private HamburgerBrett brett;
+	private final HamburgerBrett brett;
+	Random rnd = new Random();
 
 	public Servitor(HamburgerBrett brett, String navn) {
 		this.brett = brett;
@@ -10,6 +13,13 @@ public class Servitor extends Thread {
 
 	@Override
 	public void run() {
-		super.run();
+		while (true) {
+			try {
+				wait(1000);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			brett.remove();
+		}
 	}
 }

@@ -3,9 +3,6 @@ package no.hvl.dat108;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.Queue;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class HamburgerBrett {
 	private final int              kapasitet;
@@ -13,52 +10,43 @@ public class HamburgerBrett {
 
 	private int burgerNummer;
 
-	private final Lock      lock               = new ReentrantLock();
-	private final Condition plassTilBurger     = lock.newCondition();
-	private final Condition burgerTilgjengelig = lock.newCondition();
-
 	public HamburgerBrett(int kapasitet) {
 		this.kapasitet    = kapasitet;
 		this.brettKoe     = new ArrayDeque<>(kapasitet);
 		this.burgerNummer = 0;
 	}
 
-	public void add(Hamburger hb) {
-		lock.lock();
-		try {
-			while (brettKoe.size() >= kapasitet) { // sjekk om det er plass til en ny hamburger
+	public synchronized void add(Hamburger hb) {
+		while (brettKoe.size() >= kapasitet) { // sjekk om det er plass til en ny hamburger
+			try {
 				System.out.println(Thread.currentThread()
 				                         .getName() + " (kokk) klar med hamburger, men brett fullt. Venter!");
-				plassTilBurger.await(); // vent til det er plass til en ny hamburger
+				wait(); // vent til det er plass til en ny hamburger
+			} catch (InterruptedException e) {
+				System.out.println("oopsie poopsie, we made a fucky wucky UwU");
 			}
-			brettKoe.add(hb);
-			burgerTilgjengelig.signalAll();
-			System.out.println(Thread.currentThread()
-			                         .getName() + " (kokk) legger på hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
-		} catch (InterruptedException e) {
-			System.out.println("oopsie poopsie, we made a fucky wucky UwU");
-		} finally {
-			lock.unlock();
 		}
+		brettKoe.add(hb);
+		notifyAll();
+		System.out.println(Thread.currentThread()
+		                         .getName() + " (kokk) legger på hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
 	}
 
-	public void remove() {
-		lock.lock();
-		try {
-			while (brettKoe.isEmpty()) {
+	public synchronized void remove() {
+		while (brettKoe.isEmpty()) {
+			try {
+
 				System.out.println(Thread.currentThread()
 				                         .getName() + " (servitør) ønsker å ta hamburger, men brett tomt. Venter!");
-				burgerTilgjengelig.await();
+				wait();
+			} catch (InterruptedException e) {
+				System.out.println("oopsie poopsie, we made a fucky wucky UwU");
 			}
-			Hamburger hb = brettKoe.remove();
-			plassTilBurger.signalAll(); // gi beskjed til andre som prøver å legge til at det er en ledig plass
-			System.out.println(Thread.currentThread()
-			                         .getName() + " (servitør) tar av hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
-		} catch (InterruptedException e) {
-			System.out.println("oopsie poopsie, we made a fucky wucky UwU");
-		} finally {
-			lock.unlock();
 		}
+		Hamburger hb = brettKoe.remove();
+		notifyAll(); // gi beskjed til andre som prøver å legge til at det er en ledig plass
+		System.out.println(Thread.currentThread()
+		                         .getName() + " (servitør) tar av hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
 	}
 
 	public synchronized int nyttBurgerNr() {

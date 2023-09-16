@@ -12,16 +12,16 @@ public class Kokk extends Thread {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 		while (true) {
 			try {
-				//wait(rnd.nextInt(2000, 6000));
-				wait(2000);
+				wait(rnd.nextInt(2000, 6000));
+				//wait(2000);
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}
 			Hamburger burger = new Hamburger(brett.nyttBurgerNr());
-			brett.add(burger, this);
+			brett.add(burger);
 		}
 	}
 }

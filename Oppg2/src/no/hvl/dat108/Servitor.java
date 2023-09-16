@@ -12,10 +12,11 @@ public class Servitor extends Thread {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 		while (true) {
 			try {
-				wait(1000);
+				// wait(1000);
+				wait(rnd.nextInt(1000, 4000));
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}

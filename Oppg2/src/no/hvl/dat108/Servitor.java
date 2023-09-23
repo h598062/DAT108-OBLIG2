@@ -16,7 +16,7 @@ public class Servitor extends Thread {
 		while (true) {
 			try {
 				// wait(1000);
-				wait(rnd.nextInt(1000, 4000));
+				wait(rnd.nextInt(2000, 6000));
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}

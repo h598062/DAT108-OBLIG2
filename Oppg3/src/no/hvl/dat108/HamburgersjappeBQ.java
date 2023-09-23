@@ -6,6 +6,7 @@ public class HamburgersjappeBQ {
 	public static void main(String... blablabla) {
 		final String[] kokker = {"Anne", "Erik", "Knut"};
 		final String[] servitorer = {"Mia", "Per"};
+		// flere kokker enn servitører, forventer at denne kommer til å ende opp med at kokker alltid venter med å legge på
 		final int KAPASITET = 4;
 		skrivUtHeader(kokker, servitorer, KAPASITET);
 		HamburgerBrettBQ brett = new HamburgerBrettBQ(KAPASITET);

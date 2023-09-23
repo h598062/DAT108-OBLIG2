@@ -2,7 +2,7 @@ package no.hvl.dat108;
 
 import java.util.Arrays;
 
-public class Hamburgersjappe {
+public class HamburgersjappeBQ {
 	public static void main(String... blablabla) {
 		final String[] kokker     = {"Anne", "Erik", "Knut"};
 		final String[] servitorer = {"Mia", "Per"};
@@ -10,10 +10,10 @@ public class Hamburgersjappe {
 		skrivUtHeader(kokker, servitorer, KAPASITET);
 		HamburgerBrettBQ brett = new HamburgerBrettBQ(KAPASITET);
 		for (String navn : kokker) {
-			new Kokk(brett, navn).start();
+			new KokkBQ(brett, navn).start();
 		}
 		for (String navn : servitorer) {
-			new Servitor(brett, navn).start();
+			new ServitorBQ(brett, navn).start();
 		}
 	}
 

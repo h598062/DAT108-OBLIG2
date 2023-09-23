@@ -2,11 +2,11 @@ package no.hvl.dat108;
 
 import java.util.Random;
 
-public class Kokk extends Thread {
+public class KokkBQ extends Thread {
 	private final HamburgerBrettBQ brett;
 	Random rnd = new Random();
 
-	public Kokk(HamburgerBrettBQ brett, String navn) {
+	public KokkBQ(HamburgerBrettBQ brett, String navn) {
 		this.brett = brett;
 		this.setName(navn);
 	}
@@ -20,7 +20,7 @@ public class Kokk extends Thread {
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}
-			Hamburger burger = new Hamburger(brett.nyttBurgerNr());
+			HamburgerBQ burger = new HamburgerBQ(brett.nyttBurgerNr());
 			brett.add(burger);
 		}
 	}

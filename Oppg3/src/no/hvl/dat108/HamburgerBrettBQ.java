@@ -1,14 +1,12 @@
 package no.hvl.dat108;
 
-import java.util.ArrayDeque;
 import java.util.Iterator;
-import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class HamburgerBrettBQ {
 	private final int                      kapasitet;
-	private final BlockingQueue<Hamburger> brettKoe;
+	private final BlockingQueue<HamburgerBQ> brettKoe;
 	private       int                      burgerNummer;
 
 	public HamburgerBrettBQ(int kapasitet) {
@@ -17,7 +15,7 @@ public class HamburgerBrettBQ {
 		this.burgerNummer = 0;
 	}
 
-	public void add(Hamburger hb) {
+	public void add(HamburgerBQ hb) {
 		try {
 			brettKoe.put(hb);
 			System.out.println(Thread.currentThread()
@@ -29,7 +27,7 @@ public class HamburgerBrettBQ {
 
 	public void remove() {
 		try {
-			Hamburger hb = brettKoe.take();
+			HamburgerBQ hb = brettKoe.take();
 			System.out.println(Thread.currentThread()
 			                         .getName() + " (servitør) tar av hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
 		} catch (InterruptedException e) {
@@ -44,7 +42,7 @@ public class HamburgerBrettBQ {
 
 	private String lagBrettStreng() {
 		// [◖1◗]
-		Iterator<Hamburger> it = brettKoe.iterator();
+		Iterator<HamburgerBQ> it = brettKoe.iterator();
 		StringBuilder       sb = new StringBuilder();
 		sb.append('[');
 		while (it.hasNext()) {

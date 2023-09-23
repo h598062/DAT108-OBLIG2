@@ -1,9 +1,9 @@
 package no.hvl.dat108;
 
-public class Hamburger {
+public class HamburgerBQ {
 	private final int nummer;
 
-	public Hamburger(int nummer) {
+	public HamburgerBQ(int nummer) {
 		this.nummer = nummer;
 	}
 

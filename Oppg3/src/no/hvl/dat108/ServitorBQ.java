@@ -2,11 +2,11 @@ package no.hvl.dat108;
 
 import java.util.Random;
 
-public class Servitor extends Thread {
+public class ServitorBQ extends Thread {
 	private final HamburgerBrettBQ brett;
 	Random rnd = new Random();
 
-	public Servitor(HamburgerBrettBQ brett, String navn) {
+	public ServitorBQ(HamburgerBrettBQ brett, String navn) {
 		this.brett = brett;
 		this.setName(navn);
 	}

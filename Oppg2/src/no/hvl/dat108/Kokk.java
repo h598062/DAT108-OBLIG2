@@ -3,7 +3,7 @@ package no.hvl.dat108;
 import java.util.Random;
 
 public class Kokk extends Thread {
-	private final  HamburgerBrett brett;
+	private final HamburgerBrett brett;
 	Random rnd = new Random();
 
 	public Kokk(HamburgerBrett brett, String navn) {
@@ -16,7 +16,7 @@ public class Kokk extends Thread {
 		while (true) {
 			try {
 				wait(rnd.nextInt(2000, 6000));
-				//wait(2000);
+				// wait(2000);
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}

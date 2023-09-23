@@ -5,9 +5,8 @@ import java.util.Iterator;
 import java.util.Queue;
 
 public class HamburgerBrett {
-	private final int              kapasitet;
+	private final int kapasitet;
 	private final Queue<Hamburger> brettKoe;
-
 	private int burgerNummer;
 
 	public HamburgerBrett(int kapasitet) {
@@ -23,7 +22,7 @@ public class HamburgerBrett {
 				                         .getName() + " (kokk) klar med hamburger, men brett fullt. Venter!");
 				wait(); // vent til det er plass til en ny hamburger
 			} catch (InterruptedException e) {
-				System.out.println("oopsie poopsie, we made a fucky wucky UwU");
+				System.out.println("ERROR");
 			}
 		}
 		brettKoe.add(hb);
@@ -40,7 +39,7 @@ public class HamburgerBrett {
 				                         .getName() + " (servitør) ønsker å ta hamburger, men brett tomt. Venter!");
 				wait();
 			} catch (InterruptedException e) {
-				System.out.println("oopsie poopsie, we made a fucky wucky UwU");
+				System.out.println("ERROR");
 			}
 		}
 		Hamburger hb = brettKoe.remove();
@@ -57,7 +56,7 @@ public class HamburgerBrett {
 	private String lagBrettStreng() {
 		// [◖1◗]
 		Iterator<Hamburger> it = brettKoe.iterator();
-		StringBuilder       sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		sb.append('[');
 		while (it.hasNext()) {
 			sb.append("◖")

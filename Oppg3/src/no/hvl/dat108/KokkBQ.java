@@ -16,7 +16,7 @@ public class KokkBQ extends Thread {
 		while (true) {
 			try {
 				wait(rnd.nextInt(2000, 6000));
-				//wait(2000);
+				// wait(2000);
 			} catch (InterruptedException e) {
 				throw new RuntimeException(e);
 			}

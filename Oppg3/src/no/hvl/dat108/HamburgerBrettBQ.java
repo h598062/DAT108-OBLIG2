@@ -5,12 +5,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class HamburgerBrettBQ {
-	private final int                      kapasitet;
 	private final BlockingQueue<HamburgerBQ> brettKoe;
-	private       int                      burgerNummer;
+	private int burgerNummer;
 
 	public HamburgerBrettBQ(int kapasitet) {
-		this.kapasitet    = kapasitet;
 		this.brettKoe     = new ArrayBlockingQueue<>(kapasitet);
 		this.burgerNummer = 0;
 	}
@@ -21,7 +19,7 @@ public class HamburgerBrettBQ {
 			System.out.println(Thread.currentThread()
 			                         .getName() + " (kokk) legger på hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
 		} catch (InterruptedException e) {
-			System.out.println("oopsie poopsie, we made a fucky wucky UwU");
+			System.out.println("ERROR");
 		}
 	}
 
@@ -31,7 +29,7 @@ public class HamburgerBrettBQ {
 			System.out.println(Thread.currentThread()
 			                         .getName() + " (servitør) tar av hamburger ◖" + hb.getNummer() + "◗. Brett: " + lagBrettStreng());
 		} catch (InterruptedException e) {
-			System.out.println("oopsie poopsie, we made a fucky wucky UwU");
+			System.out.println("ERROR");
 		}
 	}
 
@@ -43,7 +41,7 @@ public class HamburgerBrettBQ {
 	private String lagBrettStreng() {
 		// [◖1◗]
 		Iterator<HamburgerBQ> it = brettKoe.iterator();
-		StringBuilder       sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		sb.append('[');
 		while (it.hasNext()) {
 			sb.append("◖")
